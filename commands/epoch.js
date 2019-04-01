@@ -18,7 +18,7 @@ async function scan (blockNumber) {
             m2: m2
         }
     } catch (e) {
-        console.log(e)
+        logger.error('scan error %s %s', blockNumber, e)
         return scan(blockNumber)
     }
 }
@@ -89,7 +89,7 @@ async function run (epochNumber) {
 
     let data = []
     for (let i=start; i<=end; i++) {
-       let it = await scan(i) 
+        let it = await scan(i) 
         data.push(it)
     }
 
