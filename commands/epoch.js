@@ -85,7 +85,6 @@ async function report (data) {
 async function run (epochNumber) {
     let start = (epochNumber - 1) * 900 + 1
     let end = epochNumber * 900
-    console.log(start, end)
 
     let data = []
     for (let i=start; i<=end; i++) {
