@@ -82,9 +82,34 @@ async function report (data) {
     }
 }
 
+async function getSigners (epochNumber) {
+    let checkpoint = (epochNumber - 1) * 900
+    let block = await web3Rpc.eth.getBlock(checkpoint)
+	let buff = Buffer.from(block.extraData.substring(2), 'hex')
+	let sbuff = buff.slice(32, buff.length - 65)
+	let signers = []
+	if (sbuff.length > 0) {
+		for (let i = 1; i <= sbuff.length / 20; i++) {
+			let address = sbuff.slice((i - 1) * 20, i * 20)
+			signers.push('0x' + address.toString('hex'))
+		}
+	}
+
+	buff = Buffer.from(block.validators.substring(2), 'hex')
+    let randoms = []
+	for (let i = 1; i <= buff.length / 4; i++) {
+		let k = buff.slice((i - 1) * 4, i * 4)
+		randoms.push(web3Rpc.utils.hexToUtf8('0x' + k.toString('hex')))
+	}
+	return { signers, randoms }
+}
+
 async function run (epochNumber) {
     let start = (epochNumber - 1) * 900 + 1
     let end = epochNumber * 900
+
+    let { signers, randoms } = await getSigners(epochNumber)
+    logger.info(`signers ${signers} randoms ${randoms}`)
 
     let data = []
     for (let i=start; i<=end; i++) {

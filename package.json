@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bignumber.js": "^8.1.1",
     "commander": "^2.19.0",
     "config": "^3.0.1",
     "ethereumjs-block": "^2.2.0",
