@@ -4,6 +4,7 @@
     },
     "blockchain": {
         "rpc": "https://rpc.tomochain.com",
-        "ws": "wss://ws.tomochain.com"
+        "ws": "wss://ws.tomochain.com",
+        "chainId": 88
     }
 }
