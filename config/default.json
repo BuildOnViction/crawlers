@@ -3,8 +3,13 @@
         "level": "debug"
     },
     "blockchain": {
-        "rpc": "https://rpc.tomochain.com",
-        "ws": "wss://ws.tomochain.com",
-        "chainId": 88
+//        Mainnet
+//        "rpc": "https://rpc.tomochain.com",
+//        "ws": "wss://ws.tomochain.com",
+//        "chainId": 88
+//        Testnet 
+        "rpc": "https://testnet.tomochain.com",
+        "ws": "wss://testnet.tomochain.com/ws",
+        "chainId": 89
     }
 }
