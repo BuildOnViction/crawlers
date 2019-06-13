@@ -6,7 +6,7 @@ let sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
 var nonce = 0
 
 async function run (pkey, number) {
-    const account = web3Rpc.eth.accounts.privateKeyToAccount(pkey)
+    const account = web3Rpc.eth.accounts.privateKeyToAccount('0x' + pkey)
     let coinbase = account.address
     web3Rpc.eth.accounts.wallet.add(account)
     web3Rpc.eth.defaultAccount = coinbase
