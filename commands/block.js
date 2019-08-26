@@ -57,30 +57,6 @@ function getM1M2 (block) {
     return { m1, m2 }
 }
 
-async function report (data) {
-    let m1 = {}
-    let m2 = {}
-    data.forEach(it => {
-        m1[it.m1] = (m1[it.m1] || 0) + 1
-        m2[it.m2] = (m2[it.m2] || 0) + 1
-    })
-
-    let map = {}
-    for (let k in m1) {
-        map[k] = {}
-        map[k].m1 = m1[k]
-    }
-
-    for (let j in m2) {
-        map[j] = map[j] || {}
-        map[j].m2 = m2[j]
-    }
-
-    for (let addr in map) {
-        logger.info(`addr ${addr} m1 ${map[addr].m1} m2 ${map[addr].m2}`)
-    }
-}
-
 async function getSigners (epochNumber) {
     let checkpoint = (epochNumber - 1) * 900
     let block = await web3Rpc.eth.getBlock(checkpoint)
@@ -108,16 +84,12 @@ async function run (blockHash) {
     let blockNumber = block.number
 
     let epochNumber = (blockNumber - (blockNumber % 900)) / 900 + 1
-    console.log(epochNumber)
 
     let { signers, randoms } = await getSigners(epochNumber)
     logger.info(`signers ${signers} randoms ${randoms}`)
 
     let data = []
     let it = await scan(block)
-    data.push(it)
-
-    await report(data)
     return process.exit(0)
 }
 
