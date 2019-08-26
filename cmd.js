@@ -4,6 +4,7 @@ const commander = require('commander')
 const _ = require('lodash')
 const web3Rpc = require('./models/web3rpc')
 const cmdEpoch = require('./commands/epoch')
+const cmdBlock = require('./commands/block')
 const cmdSendTomo = require('./commands/sendTomo')
 
 commander
@@ -14,6 +15,12 @@ commander
     .command('epoch <epochNumber>')
     .action(async (epochNumber) => {
         await cmdEpoch.run(epochNumber)
+    })
+
+commander
+    .command('block <blockHash>')
+    .action(async (blockHash) => {
+        await cmdBlock.run(blockHash)
     })
 
 commander
